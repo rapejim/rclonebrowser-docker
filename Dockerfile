@@ -22,13 +22,12 @@ RUN apk --no-cache add \
       libstdc++ \
       libgcc \
       dbus \
-      xterm \
-    && cd /tmp \
-    && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
-    && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
-    && mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin \
-    && rm -r /tmp/rclone* && \
-
+      xterm && \
+    cd /tmp && \
+    wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip && \
+    unzip /tmp/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip && \
+    mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin && \
+    rm -r /tmp/rclone* && \
     apk add --no-cache --virtual=build-dependencies \
         build-base \
         cmake \
@@ -36,7 +35,6 @@ RUN apk --no-cache add \
         gcc \
         git \
         qt5-qtbase qt5-qtmultimedia-dev qt5-qttools-dev && \
-
 # Compile RcloneBrowser
     git clone https://github.com/noabody/RcloneBrowser.git /tmp && \
     mkdir /tmp/build && \
@@ -45,9 +43,8 @@ RUN apk --no-cache add \
     cmake --build . && \
     ls -l /tmp/build && \
     cp /tmp/build/build/rclone-browser /usr/bin  && \
-
-    # cleanup
-     apk del --purge build-dependencies && \
+# Cleanup
+    apk del --purge build-dependencies && \
     rm -rf /tmp/*
  
 # Maximize only the main/initial window.
