@@ -36,7 +36,7 @@ RUN apk --no-cache add \
         git \
         qt5-qtbase qt5-qtmultimedia-dev qt5-qttools-dev && \
 # Compile RcloneBrowser
-    git clone https://github.com/noabody/RcloneBrowser.git /tmp && \
+    git clone https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
     mkdir /tmp/build && \
     cd /tmp/build && \
     cmake .. && \
@@ -54,11 +54,12 @@ RUN \
 
 # Generate and install favicons.
 RUN \
-    APP_ICON_URL=https://github.com/noabody/RcloneBrowser/raw/master/src/icon.png && \
+    APP_ICON_URL=https://github.com/rclone/rclone/raw/master/graphics/logo/logo_symbol/logo_symbol_color_512px.png && \
     install_app_icon.sh "$APP_ICON_URL"
 
 # Add files.
 COPY rootfs/ /
+COPY VERSION /
 
 # Set environment variables.
 ENV APP_NAME="RcloneBrowser" \
