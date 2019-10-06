@@ -2,7 +2,7 @@
 # RcloneBrowser Dockerfile
 #
 
-FROM jlesage/baseimage-gui:alpine-3.8-glibc
+FROM jlesage/baseimage-gui:alpine-3.9-glibc
 
 # Define environment variables
 ENV RCLONE_VERSION=current
@@ -22,13 +22,12 @@ RUN apk --no-cache add \
       libstdc++ \
       libgcc \
       dbus \
-      xterm \
-    && cd /tmp \
-    && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
-    && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
-    && mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin \
-    && rm -r /tmp/rclone* && \
-
+      xterm && \
+    cd /tmp && \
+    wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip && \
+    unzip /tmp/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip && \
+    mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin && \
+    rm -r /tmp/rclone* && \
     apk add --no-cache --virtual=build-dependencies \
         build-base \
         cmake \
@@ -36,18 +35,16 @@ RUN apk --no-cache add \
         gcc \
         git \
         qt5-qtbase qt5-qtmultimedia-dev qt5-qttools-dev && \
-
 # Compile RcloneBrowser
-    git clone https://github.com/mmozeiko/RcloneBrowser.git /tmp && \
+    git clone https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
     mkdir /tmp/build && \
     cd /tmp/build && \
     cmake .. && \
     cmake --build . && \
     ls -l /tmp/build && \
     cp /tmp/build/build/rclone-browser /usr/bin  && \
-
-    # cleanup
-     apk del --purge build-dependencies && \
+# Cleanup
+    apk del --purge build-dependencies && \
     rm -rf /tmp/*
  
 # Maximize only the main/initial window.
@@ -57,11 +54,12 @@ RUN \
 
 # Generate and install favicons.
 RUN \
-    APP_ICON_URL=https://github.com/mmozeiko/RcloneBrowser/raw/master/src/icon.png && \
+    APP_ICON_URL=https://github.com/kapitainsky/RcloneBrowser/wiki/images/rclone_256.png && \
     install_app_icon.sh "$APP_ICON_URL"
 
 # Add files.
 COPY rootfs/ /
+COPY VERSION /
 
 # Set environment variables.
 ENV APP_NAME="RcloneBrowser" \
