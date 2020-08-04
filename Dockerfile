@@ -2,10 +2,12 @@
 # RcloneBrowser Dockerfile
 #
 
-FROM jlesage/baseimage-gui:alpine-3.10-glibc
+FROM jlesage/baseimage-gui:alpine-3.11-glibc
+
+# Define build arguments
+ARG RCLONE_VERSION=current
 
 # Define environment variables
-ENV RCLONE_VERSION=current
 ENV ARCH=amd64
 
 # Define working directory.
@@ -67,7 +69,7 @@ ENV APP_NAME="RcloneBrowser" \
 
 # Define mountable directories.
 VOLUME ["/config"]
-VOLUME ["/shared"]
+VOLUME ["/media"]
 
 # Metadata.
 LABEL \

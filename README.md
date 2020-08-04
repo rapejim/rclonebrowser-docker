@@ -1,7 +1,9 @@
 ![](https://github.com/kapitainsky/RcloneBrowser/wiki/images/rclone_128.png) 
 # rclonebrowser-docker
 
-A repository for creating a docker container including RClone Browser with GUI interface.
+A repository for creating a docker container including RClone Browser with GUI interface, based on [kapitainsky fork](https://github.com/kapitainsky/RcloneBrowser)
+
+Thank you for continue developing this awesome software :)
 
 [![](https://images.microbadger.com/badges/version/romancin/rclonebrowser.svg)](https://microbadger.com/images/romancin/rclonebrowser "Docker image version")
 [![](https://images.microbadger.com/badges/image/romancin/rclonebrowser.svg)](https://microbadger.com/images/romancin/rclonebrowser "Docker image size")
@@ -21,7 +23,7 @@ Instructions:
 - Map any local port to 5800 for web access
 - Map any local port to 5900 for VNC access
 - Map a local volume to /config (Stores configuration data)
-- Map a local volume to /shared (Access media files)
+- Map a local volume to /media (Access media files)
 
 Sample run command:
 
@@ -282,6 +284,6 @@ Having troubles with the container or have questions?  Please
 
 
 ## Changelog
+v3.0.0 (22/03/2020): Updated to RcloneBrowser 1.8.0 version
 v2.0.0 (04/10/2019): Changed git repository to kapitainsky fork
-
 v1.0.1 (22/09/2019): Updated to latest image from jlesage and added Jenkinsfile for CI
