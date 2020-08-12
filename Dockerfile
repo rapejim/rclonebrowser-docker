@@ -2,11 +2,13 @@
 # RcloneBrowser Dockerfile
 #
 
-FROM jlesage/baseimage-gui:alpine-3.10-glibc
+FROM jlesage/baseimage-gui:alpine-3.12-glibc
+
+# Define build arguments
+ARG RCLONE_VERSION=current
 
 # Define environment variables
-ENV RCLONE_VERSION=current
-ENV ARCH=amd64
+ENV ARCH=armhf
 
 # Define working directory.
 WORKDIR /tmp
@@ -36,7 +38,7 @@ RUN apk --no-cache add \
         git \
         qt5-qtbase qt5-qtmultimedia-dev qt5-qttools-dev && \
 # Compile RcloneBrowser
-    git clone https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
+    git clone -b kptsky_experimenting https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
     mkdir /tmp/build && \
     cd /tmp/build && \
     cmake .. && \
@@ -67,7 +69,7 @@ ENV APP_NAME="RcloneBrowser" \
 
 # Define mountable directories.
 VOLUME ["/config"]
-VOLUME ["/shared"]
+VOLUME ["/media"]
 
 # Metadata.
 LABEL \
