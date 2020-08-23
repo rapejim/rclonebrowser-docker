@@ -2,7 +2,7 @@
 # RcloneBrowser Dockerfile
 #
 
-FROM jlesage/baseimage-gui:alpine-3.11-glibc
+FROM didierc/baseimage-gui
 
 # Define build arguments
 ARG RCLONE_VERSION=current
@@ -24,6 +24,7 @@ RUN apk --no-cache add \
       libstdc++ \
       libgcc \
       dbus \
+      qt5-qtmultimedia \
       xterm && \
     cd /tmp && \
     wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip && \
@@ -38,7 +39,7 @@ RUN apk --no-cache add \
         git \
         qt5-qtbase qt5-qtmultimedia-dev qt5-qttools-dev && \
 # Compile RcloneBrowser
-    git clone https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
+    git clone -b kptsky_experimenting https://github.com/kapitainsky/RcloneBrowser.git /tmp && \
     mkdir /tmp/build && \
     cd /tmp/build && \
     cmake .. && \
